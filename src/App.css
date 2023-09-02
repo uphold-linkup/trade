@@ -1,3 +1,16 @@
 * {
     font-family: Helvetica, sans-serif;
 }
+
+.img-container {
+    position: relative;
+    text-align: center;
+    color: black;
+  }
+  
+  .top-left {
+    position: absolute;
+    top:32px;
+    left: 24px;
+    text-align: left;
+  }
