@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-const Change = ({ close, uad_percent }) => {
+const Change = ({ close, uad_percent, kd = 0 }) => {
   return (
     <Button
       variant="contained"
