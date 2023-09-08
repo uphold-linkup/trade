@@ -2,6 +2,10 @@
     font-family: Helvetica, sans-serif;
 }
 
+body {
+  margin-bottom: 56px;
+}
+
 .img-container {
     position: relative;
     text-align: center;

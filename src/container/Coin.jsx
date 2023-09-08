@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Button, Card, Typography } from "@mui/material";
 import Change from "./Change";
+import TradeCard from "../components/TradeCard";
 
 const Coin = ({
   code = "BTC",
@@ -46,7 +47,9 @@ const Coin = ({
   };
 
   useEffect(() => {
-    let ivt = document.querySelector(".investment-field input").value;
+    let ivt =
+      document.querySelector(".investment-field input") &&
+      document.querySelector(".investment-field input").value;
     let val = parseFloat(ivt) + parseFloat(ivt) * profit;
     if (isNaN(val)) val = 0;
     val = ((val * 100) / 100).toFixed(2);
@@ -147,85 +150,7 @@ const Coin = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <Card style={{ position: "fixed", bottom: 0, padding: "12px" }}>
-        <Typography color="#515151">Trading Time</Typography>
-        <Grid container>
-          <Grid sm={6} md={6}>
-            <Button
-              style={{ width: "46vw" }}
-              variant="contained"
-              color="success"
-            >
-              BUY
-            </Button>
-          </Grid>
-          <Grid sm={6} md={6}>
-            <Button style={{ width: "46vw" }} variant="contained" color="error">
-              SELL
-            </Button>
-          </Grid>
-        </Grid>
-        <Grid container style={{ justifyContent: "center" }}>
-          <Grid xs={3} md={3} align="center" m={1}>
-            <Button
-              variant={profit == 0.6 ? "contained" : "outlined"}
-              onClick={(e) => setProfit(0.6)}
-            >
-              Time
-              <br />
-              60S
-              <br />
-              Scale: 60.00%
-            </Button>
-          </Grid>
-          <Grid xs={3} md={3} align="center" m={1}>
-            <Button
-              variant={profit == 0.4 ? "contained" : "outlined"}
-              onClick={(e) => setProfit(0.4)}
-            >
-              Time
-              <br />
-              120S
-              <br />
-              Scale: 40.00%
-            </Button>
-          </Grid>
-          <Grid xs={3} md={3} align="center" m={1}>
-            <Button
-              variant={profit == 0.3 ? "contained" : "outlined"}
-              onClick={(e) => setProfit(0.3)}
-            >
-              Time
-              <br />
-              180S
-              <br />
-              Scale: 30.00%
-            </Button>
-          </Grid>
-        </Grid>
-        <Grid container>
-          <Grid xs={6} md={6}>
-            <Typography color="blue">Available Balance:</Typography>
-            <Typography color="blue">70000</Typography>
-          </Grid>
-          <Grid xs={6} md={6} align="right">
-            <Typography>Expected Earnings</Typography>
-            <Typography color={expectedEarning == "0.00" ? "" : "green"}>
-              {expectedEarning}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Typography>Investment Amount</Typography>
-        <Input
-          className="investment-field"
-          type="number"
-          onChange={(e) => handleInvestment(e)}
-        />
-        <Typography>Minimum Purchase Limit: 100</Typography>
-        <Button type="submit" variant="contained" style={{ width: "100%" }}>
-          Submit
-        </Button>
-      </Card>
+      <TradeCard />
     </Box>
   );
 };

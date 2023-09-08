@@ -89,20 +89,3 @@ const Trade = ({}) => {
 };
 
 export default Trade;
-{
-  /* <Grid xs={4}>
-          <Typography mb={0.5}>BTC/USDT</Typography>
-          <Typography mb={0.5}>{BTC && BTC.price}</Typography>
-          <Typography mb={0.5}>{BTC && BTC.change}</Typography>
-        </Grid>
-        <Grid xs={4}>
-          <Typography mb={0.5}>ETH/USDT</Typography>
-          <Typography mb={0.5}>{ETH && ETH.price}</Typography>
-          <Typography mb={0.5}>{ETH && ETH.change}</Typography>
-        </Grid>
-        <Grid xs={4}>
-          <Typography mb={0.5}>LTC/USDT</Typography>
-          <Typography mb={0.5}>{LTC && LTC.price}</Typography>
-          <Typography mb={0.5}>{LTC && LTC.change}</Typography>
-        </Grid> */
-}

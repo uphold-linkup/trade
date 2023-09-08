@@ -16,6 +16,9 @@ import {
 } from "@mui/icons-material";
 import Profile from "./container/Profile";
 import MyCenter from "./container/MyCenter";
+import { Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Orders from "./container/Orders";
 
 function App() {
   const [value, setValue] = React.useState(0);
@@ -27,30 +30,16 @@ function App() {
   };
   return (
     <div className="App">
-      {renderPage()}
-      <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-        elevation={3}
-      >
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
-          <BottomNavigationAction label="Home" icon={<HomeOutlined />} />
-          <BottomNavigationAction label="Order" icon={<SellOutlined />} />
-          <BottomNavigationAction
-            label="Assets"
-            icon={<AccountBalanceWalletOutlined />}
-          />
-          <BottomNavigationAction
-            label="My center"
-            icon={<PersonOutlineOutlined />}
-          />
-        </BottomNavigation>
-      </Paper>
+      <Routes>
+        <Route>
+          <Route path="/" element={<Trade />} />
+          <Route path="/trade" element={<Trade />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/mycenter" element={<MyCenter />} />
+        </Route>
+      </Routes>
+      <NavBar />
     </div>
   );
 }
