@@ -1,13 +1,29 @@
 {
   "files": {
-    "main.css": "./static/css/main.f2dacd17.css",
-    "main.js": "./static/js/main.e6522f23.js",
-    "index.html": "./index.html",
-    "main.f2dacd17.css.map": "./static/css/main.f2dacd17.css.map",
-    "main.e6522f23.js.map": "./static/js/main.e6522f23.js.map"
+    "main.css": "/trade/static/css/main.7a4f9097.css",
+    "main.js": "/trade/static/js/main.cde1a509.js",
+    "static/media/uniswap.png": "/trade/static/media/uniswap.f1aeae6ced57a2c173e2.png",
+    "static/media/bitcoin.png": "/trade/static/media/bitcoin.056563397a49c48ed32f.png",
+    "static/media/avalanche.png": "/trade/static/media/avalanche.aa316d481bf2e89c578e.png",
+    "static/media/dogecoin.png": "/trade/static/media/dogecoin.67bc2b14d3d546185663.png",
+    "static/media/polkadot.png": "/trade/static/media/polkadot.895519ff48050b664c0d.png",
+    "static/media/cronos.png": "/trade/static/media/cronos.b332f320847614c82941.png",
+    "static/media/shiba-inu.png": "/trade/static/media/shiba-inu.a4fc6b65931f8b2fa7a7.png",
+    "static/media/filecoin.png": "/trade/static/media/filecoin.fc05f152bf356448d8ff.png",
+    "static/media/litecoin.png": "/trade/static/media/litecoin.c13f387f10e469c9fa85.png",
+    "static/media/stellar.png": "/trade/static/media/stellar.7203c72e7d3d762268d6.png",
+    "static/media/cardano.png": "/trade/static/media/cardano.88aee1b4e83a9d0736a3.png",
+    "static/media/solana.png": "/trade/static/media/solana.061d98176de9a7c40ee2.png",
+    "static/media/iota.png": "/trade/static/media/iota.d19f9f9e9c5086278d10.png",
+    "static/media/xrp.png": "/trade/static/media/xrp.3f275ff5c3bfee305e68.png",
+    "static/media/ethereum.png": "/trade/static/media/ethereum.15a9e5bc22dd8b28d822.png",
+    "static/media/internet-computer.png": "/trade/static/media/internet-computer.688ef11891f399c5afd9.png",
+    "index.html": "/trade/index.html",
+    "main.7a4f9097.css.map": "/trade/static/css/main.7a4f9097.css.map",
+    "main.cde1a509.js.map": "/trade/static/js/main.cde1a509.js.map"
   },
   "entrypoints": [
-    "static/css/main.f2dacd17.css",
-    "static/js/main.e6522f23.js"
+    "static/css/main.7a4f9097.css",
+    "static/js/main.cde1a509.js"
   ]
 }
