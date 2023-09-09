@@ -48,9 +48,10 @@ export default function Orders() {
   };
 
   const orders = JSON.parse(localStorage.getItem("orders"));
-  orders.sort((a, b) => {
-    return new Date(b.startTime) - new Date(a.startTime);
-  });
+  orders &&
+    orders.sort((a, b) => {
+      return new Date(b.startTime) - new Date(a.startTime);
+    });
 
   return (
     <Box>
@@ -70,40 +71,42 @@ export default function Orders() {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          {orders.map((o) =>
-            new Date(o.closeTime) > new Date() ? (
-              <Order
-                startTime={o.startTime}
-                closeTime={o.closeTime}
-                price={o.price}
-                investment={o.investment}
-                closePrice={o.closePrice}
-                duration={o.duration}
-                PL={o.PL}
-                position={o.position}
-              />
-            ) : (
-              ""
-            )
-          )}
+          {orders &&
+            orders.map((o) =>
+              new Date(o.closeTime) > new Date() ? (
+                <Order
+                  startTime={o.startTime}
+                  closeTime={o.closeTime}
+                  price={o.price}
+                  investment={o.investment}
+                  closePrice={o.closePrice}
+                  duration={o.duration}
+                  PL={o.PL}
+                  position={o.position}
+                />
+              ) : (
+                ""
+              )
+            )}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          {orders.map((o) =>
-            new Date(o.closeTime) < new Date() ? (
-              <Order
-                startTime={o.startTime}
-                closeTime={o.closeTime}
-                price={o.price}
-                investment={o.investment}
-                closePrice={o.closePrice}
-                duration={o.duration}
-                PL={o.PL}
-                position={o.position}
-              />
-            ) : (
-              ""
-            )
-          )}
+          {orders &&
+            orders.map((o) =>
+              new Date(o.closeTime) < new Date() ? (
+                <Order
+                  startTime={o.startTime}
+                  closeTime={o.closeTime}
+                  price={o.price}
+                  investment={o.investment}
+                  closePrice={o.closePrice}
+                  duration={o.duration}
+                  PL={o.PL}
+                  position={o.position}
+                />
+              ) : (
+                ""
+              )
+            )}
         </CustomTabPanel>
       </Box>
     </Box>

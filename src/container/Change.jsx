@@ -16,7 +16,7 @@ const Change = ({ close, uad_percent, kd = 0 }) => {
         />
       }
     >
-      {uad_percent}%%
+      {uad_percent}%
     </Button>
   );
 };

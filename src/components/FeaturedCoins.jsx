@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const FeaturedCoins = ({ crypto }) => {
   return (
-    <Grid container>
+    <Grid container p={1}>
       <Grid xs={4} md={4}>
         <Link to="/coin" style={{ textDecoration: "none" }}>
           <Typography>BTC/USDT</Typography>

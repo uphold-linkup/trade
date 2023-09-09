@@ -1,7 +1,8 @@
-import { Avatar, Box, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
 import { Palette } from "../constants/Palette";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { useState } from "react";
+import { AddCardOutlined, PowerSettingsNewOutlined } from "@mui/icons-material";
 
 const Profile = ({
   name = "Raghav Gupta",
@@ -84,6 +85,24 @@ const Profile = ({
             </Typography>
           </Box>
         </div>
+        <Box>
+          <Button
+            variant="text"
+            startIcon={<AddCardOutlined />}
+            style={{ color: "black" }}
+          >
+            Recharge record
+          </Button>
+        </Box>
+        <Box>
+          <Button
+            variant="text"
+            startIcon={<PowerSettingsNewOutlined />}
+            style={{ color: "black" }}
+          >
+            Log out
+          </Button>
+        </Box>
       </Grid>
       <Grid xs={0} md={2}></Grid>
     </Grid>

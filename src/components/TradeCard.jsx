@@ -83,6 +83,11 @@ const InvestmentForm = ({ price }) => {
   };
 
   const placeOrder = () => {
+    if (!user) {
+      setSnackbar({ message: "User not registered", severity: "error" });
+      handleSnackBar({ vertical: "top", horizontal: "right" });
+      return;
+    }
     const inv =
       document.querySelector(".investment-field input") &&
       parseFloat(document.querySelector(".investment-field input").value);

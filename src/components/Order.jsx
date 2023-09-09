@@ -1,5 +1,6 @@
 import { Card, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { useEffect, useState } from "react";
 
 const Order = ({
   startTime = "2023-08-18 12:13:17",
@@ -11,13 +12,25 @@ const Order = ({
   PL = 600,
   position = "Closed",
 }) => {
+  const [counter, setCounter] = useState("...");
+  useEffect(() => {
+    setInterval(() => {
+      const diff = parseInt(parseInt(new Date(closeTime) - new Date()) / 1000);
+      if (diff <= 0) {
+        setCounter(180);
+        clearInterval(this);
+        return;
+      }
+      setCounter(diff);
+    }, 1000);
+  }, []);
   return (
     <Card style={{ margin: "12px 0" }}>
       <Grid container p={1.4}>
         <Grid xs={12} my={0.4}>
           <Typography fontSize={12}>
             <span style={{ color: "green" }}>Up</span> {startTime} Close Time{" "}
-            {closeTime}
+            {new Date(closeTime) < new Date() ? closeTime : "-"}
           </Typography>
         </Grid>
         {/* 1st Row */}
@@ -46,8 +59,12 @@ const Order = ({
           </Typography>
         </Grid>
         <Grid xs={4} md={4}>
-          <Typography fontSize={14} align="right">
-            {closePrice}
+          <Typography
+            fontSize={14}
+            align="right"
+            color={new Date(closeTime) < new Date() ? "green" : "black"}
+          >
+            {new Date(closeTime) < new Date() ? closePrice : "-"}
           </Typography>
         </Grid>
         <Grid py={1.6} />
@@ -69,11 +86,15 @@ const Order = ({
         </Grid>
         {/* 4th Row */}
         <Grid xs={4} md={4}>
-          <Typography fontSize={14}>{duration} Sec</Typography>
+          <Typography fontSize={14}>{counter} Sec</Typography>
         </Grid>
         <Grid xs={4} md={4}>
-          <Typography fontSize={14} align="center">
-            {PL}
+          <Typography
+            fontSize={14}
+            align="center"
+            color={new Date(closeTime) < new Date() ? "green" : "black"}
+          >
+            {new Date(closeTime) < new Date() ? PL : "-"}
           </Typography>
         </Grid>
         <Grid xs={4} md={4}>
