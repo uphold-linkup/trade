@@ -18,3 +18,7 @@ body {
     left: 24px;
     text-align: left;
   }
+
+  .MuiSnackbar-root{
+    z-index: 999;
+  }

@@ -1,7 +1,7 @@
 import { Avatar, Box, Paper, Typography } from "@mui/material";
 import { Palette } from "../constants/Palette";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-import styled from "@emotion/styled";
+import { useState } from "react";
 
 const Profile = ({
   name = "Raghav Gupta",
@@ -9,6 +9,11 @@ const Profile = ({
   email = "raghav@gmail.com",
   mobile = "6387658003",
 }) => {
+  const [user, setUser] = useState(
+    localStorage.getItem("token")
+      ? JSON.parse(atob(localStorage.getItem("token")))
+      : null
+  );
   function stringAvatar(name) {
     return {
       sx: {
@@ -53,11 +58,13 @@ const Profile = ({
             color={Palette.text}
           >
             <Box my={2}>
-              <Avatar {...stringAvatar(name)} />
+              <Avatar {...stringAvatar(user ? user.name : "N A")} />
             </Box>
-            <Typography>{email}</Typography>
+            <Typography>{user ? user.email : "Unregistered"}</Typography>
             <Box mt={1} display="flex" flexDirection="row">
-              <Typography mx={1}>ID: {mobile}</Typography>
+              <Typography mx={1}>
+                ID: {user ? user.mobile : "Unknow"}
+              </Typography>
               <Typography>My credit score: 100.000</Typography>
             </Box>
           </Box>
@@ -72,7 +79,9 @@ const Profile = ({
             top={-50}
           >
             <Typography>Asset Center(Rupees)</Typography>
-            <Typography variant="h5">{balance + ".00"}</Typography>
+            <Typography variant="h5">
+              {user ? user.creds + ".00" : "0.00"}
+            </Typography>
           </Box>
         </div>
       </Grid>

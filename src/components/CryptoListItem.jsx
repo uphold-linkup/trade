@@ -1,13 +1,14 @@
 import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 import Change from "../container/Change";
+import CoinIcons from "../assets/coins/CoinIcons";
 
-const CryptoListItem = ({ id, code, crypto, close, uad_percent }) => {
+const CryptoListItem = ({ id, path, code, crypto, close, uad_percent }) => {
   return (
     <Grid container py={1}>
       <Grid xs={4} sm={4} md={4}>
         <Box display="flex" alignItems="center" justifyContent="left">
           <img
-            src={`./assets/coins/${id}.png`}
+            src={CoinIcons[path]}
             width={24}
             height={24}
             style={{ margin: "0 10px" }}

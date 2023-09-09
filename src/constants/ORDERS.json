@@ -1,0 +1,13 @@
+[
+    {
+        "startTime":"2023-08-18 12:13:17",
+        "closeTime":"2023-08-18 12:15:17",
+        "coin":"BTC/USDT",
+        "price":26580.47,
+        "investment":20000,
+        "closePrice":26586.51,
+        "duration":180,
+        "PL":600,
+        "position":"Closed"
+    }
+]

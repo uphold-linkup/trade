@@ -150,7 +150,7 @@ const Coin = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <TradeCard />
+      <TradeCard price={price} />
     </Box>
   );
 };

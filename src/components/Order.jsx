@@ -12,7 +12,7 @@ const Order = ({
   position = "Closed",
 }) => {
   return (
-    <Card>
+    <Card style={{ margin: "12px 0" }}>
       <Grid container p={1.4}>
         <Grid xs={12} my={0.4}>
           <Typography fontSize={12}>
@@ -78,7 +78,7 @@ const Order = ({
         </Grid>
         <Grid xs={4} md={4}>
           <Typography fontSize={14} align="right">
-            {position}
+            {new Date(closeTime) < new Date() ? "Closed" : "Open"}
           </Typography>
         </Grid>
       </Grid>

@@ -1,38 +1,30 @@
 import * as React from "react";
-// import Box from '@mui/material/Box';
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import RestoreIcon from "@mui/icons-material/Restore";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import "./App.css";
-import { Paper } from "@mui/material";
 import Trade from "./container/Trade";
-import Coin from "./container/Coin";
-import {
-  AccountBalanceWalletOutlined,
-  HomeOutlined,
-  PersonOutlineOutlined,
-  SellOutlined,
-} from "@mui/icons-material";
 import Profile from "./container/Profile";
 import MyCenter from "./container/MyCenter";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useSearchParams } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Orders from "./container/Orders";
+import { useState, useEffect } from "react";
+import Coin from "./container/Coin";
 
 function App() {
-  const [value, setValue] = React.useState(0);
-  const renderPage = () => {
-    if (value == 0) return <Trade />;
-    else if (value == 1) return <Coin />;
-    else if (value == 2) return <Profile />;
-    else if (value == 3) return <MyCenter />;
-  };
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+
+  useEffect(() => {
+    // updating token if it's valid base64 and stopping localstorage value to get updated to null
+    var base64regex =
+      /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    if (base64regex.test(token) && token) localStorage.setItem("token", token);
+  }, [searchParams]);
   return (
     <div className="App">
       <Routes>
         <Route>
-          <Route path="/" element={<Trade />} />
+          <Route index path="/" element={<Trade />} />
+          <Route path="/coin" element={<Coin />} />
           <Route path="/trade" element={<Trade />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/profile" element={<Profile />} />

@@ -1,9 +1,19 @@
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Input from "@mui/material/Input";
-import { Box, Button, Card, Container, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  Container,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
+import getDateTime from "../utils/getDateTime";
+import randRange from "../utils/randRange";
 
-const TradeCard = () => {
+const TradeCard = ({ price }) => {
   const [direction, setDirection] = useState(null);
   return (
     <Card
@@ -19,7 +29,7 @@ const TradeCard = () => {
       {direction == null ? (
         <TradeDirectionButtons setDirection={setDirection} />
       ) : (
-        <InvestmentForm />
+        <InvestmentForm price={price} />
       )}
     </Card>
   );
@@ -52,7 +62,16 @@ const TradeDirectionButtons = ({ setDirection }) => {
   );
 };
 
-const InvestmentForm = () => {
+const InvestmentForm = ({ price }) => {
+  const [snackbar, setSnackbar] = useState({
+    message: "Order Placed!",
+    severity: "success",
+  });
+  const [user, setUser] = useState(
+    localStorage.getItem("token")
+      ? JSON.parse(atob(localStorage.getItem("token")))
+      : null
+  );
   const [expectedEarning, setExpectedEarning] = useState(0.0);
   const [profit, setProfit] = useState(0.0);
   const [tradeTime, setTradeTime] = useState(0);
@@ -63,6 +82,52 @@ const InvestmentForm = () => {
     setExpectedEarning(val);
   };
 
+  const placeOrder = () => {
+    const inv =
+      document.querySelector(".investment-field input") &&
+      parseFloat(document.querySelector(".investment-field input").value);
+    let orders = JSON.parse(localStorage.getItem("orders"))
+      ? JSON.parse(localStorage.getItem("orders"))
+      : [];
+    if (user.creds < inv) {
+      setSnackbar({ message: "Insuffient Balance", severity: "error" });
+      handleSnackBar({ vertical: "top", horizontal: "right" });
+      return;
+    }
+    setUser({ ...user, creds: user.creds - inv });
+    localStorage.setItem(
+      "token",
+      btoa(JSON.stringify({ ...user, creds: user.creds - inv }))
+    );
+    orders.push({
+      startTime: getDateTime(),
+      closeTime: getDateTime(180),
+      coin: "BTC/USDT",
+      price: price,
+      investment: inv,
+      closePrice: parseFloat(price) + randRange(100, 800) / 100,
+      duration: 180,
+      PL: expectedEarning - inv,
+      position: "Open",
+    });
+    localStorage.setItem("orders", JSON.stringify(orders));
+    setSnackbar({ message: "Order Placed!", severity: "success" });
+    handleSnackBar({ vertical: "top", horizontal: "right" });
+  };
+  const [state, setState] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const { vertical, horizontal, open } = state;
+
+  const handleSnackBar = (newState) => {
+    setState({ ...newState, open: true });
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
   useEffect(() => {
     let ivt =
       document.querySelector(".investment-field input") &&
@@ -74,6 +139,22 @@ const InvestmentForm = () => {
   }, [profit]);
   return (
     <>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        message="I love snacks"
+        key={vertical + horizontal}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
       <Typography color="#515151" py={1} variant="h6">
         Trading Time
       </Typography>
@@ -118,7 +199,7 @@ const InvestmentForm = () => {
       <Grid container>
         <Grid xs={6} md={6}>
           <Typography color="blue">Available Balance:</Typography>
-          <Typography color="blue">70000</Typography>
+          <Typography color="blue">{user ? user.creds : "0.00"}</Typography>
         </Grid>
         <Grid xs={6} md={6} align="right">
           <Typography>Expected Earnings</Typography>
@@ -135,7 +216,12 @@ const InvestmentForm = () => {
         style={{ width: "100%" }}
       />
       <Typography py={1}>Minimum Purchase Limit: 100</Typography>
-      <Button type="submit" variant="contained" style={{ width: "100%" }}>
+      <Button
+        type="submit"
+        variant="contained"
+        style={{ width: "100%" }}
+        onClick={() => placeOrder()}
+      >
         Submit
       </Button>
     </>
