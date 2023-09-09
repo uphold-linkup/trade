@@ -14,6 +14,8 @@ import axios from "axios";
 import { Box, Button, Card, Typography } from "@mui/material";
 import Change from "./Change";
 import TradeCard from "../components/TradeCard";
+import COINS from "../constants/COINS";
+import { useAllCrypto } from "../api/useAllCrypto";
 
 const Coin = ({
   code = "BTC",
@@ -21,6 +23,7 @@ const Coin = ({
   close = "1",
   uad_percent = "0.32",
 }) => {
+  const [crypto] = useAllCrypto();
   const [data, setData] = useState();
   const [expectedEarning, setExpectedEarning] = useState(0.0);
   const [profit, setProfit] = useState(0.0);
@@ -34,10 +37,6 @@ const Coin = ({
       axios({ url: endpoint }).then((response) => setData(response.data.data));
     }, 5000);
   }, []);
-
-  function createData(trade, direction, price, size) {
-    return { trade, direction, price, size };
-  }
 
   const handleInvestment = (e) => {
     let val = parseFloat(e.target.value) + parseFloat(e.target.value) * profit;
@@ -59,15 +58,18 @@ const Coin = ({
   return (
     <Box>
       <Grid container p={1}>
-        <Grid sx={8} sm={8} md={8}>
+        <Grid xs={4} md={8}>
           <Typography fontWeight={800}>{code}/USDT</Typography>
           <Typography variant="h6" color={close ? "green" : "red"}>
-            {price}
+            {crypto && crypto.find((o) => o.instId === `BTC-USDT-SWAP`).markPx}
           </Typography>
-          <Change close={close} uad_percent={uad_percent} />
+          <Change
+            close={COINS.find((c) => c.code === "BTC").close ? "green" : "red"}
+            uad_percent={COINS.find((c) => c.code === "BTC").uad_percent}
+          />
         </Grid>
-        <Grid sx={4} sm={4} md={4} container>
-          <Grid sx={6} md={6}>
+        <Grid xs={8} md={4} container>
+          <Grid sx={6} md={6} px={2}>
             <Typography
               fontSize={13}
               color="grey
@@ -90,7 +92,7 @@ const Coin = ({
               24H quantity
             </Typography>
           </Grid>
-          <Grid sx={6} md={6}>
+          <Grid sx={6} md={6} px={2}>
             <Typography fontSize={13} align="right">
               26815.78687
             </Typography>
@@ -150,7 +152,11 @@ const Coin = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <TradeCard price={price} />
+      <TradeCard
+        price={
+          crypto && crypto.find((o) => o.instId === `BTC-USDT-SWAP`).markPx
+        }
+      />
     </Box>
   );
 };
