@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/trade/static/css/main.7a4f9097.css",
-    "main.js": "/trade/static/js/main.51f922d2.js",
+    "main.js": "/trade/static/js/main.333df55b.js",
     "static/media/uniswap.png": "/trade/static/media/uniswap.f1aeae6ced57a2c173e2.png",
     "static/media/bitcoin.png": "/trade/static/media/bitcoin.056563397a49c48ed32f.png",
     "static/media/avalanche.png": "/trade/static/media/avalanche.aa316d481bf2e89c578e.png",
@@ -20,10 +20,10 @@
     "static/media/internet-computer.png": "/trade/static/media/internet-computer.688ef11891f399c5afd9.png",
     "index.html": "/trade/index.html",
     "main.7a4f9097.css.map": "/trade/static/css/main.7a4f9097.css.map",
-    "main.51f922d2.js.map": "/trade/static/js/main.51f922d2.js.map"
+    "main.333df55b.js.map": "/trade/static/js/main.333df55b.js.map"
   },
   "entrypoints": [
     "static/css/main.7a4f9097.css",
-    "static/js/main.51f922d2.js"
+    "static/js/main.333df55b.js"
   ]
 }
