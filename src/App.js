@@ -17,8 +17,18 @@ function App() {
     // updating token if it's valid base64 and stopping localstorage value to get updated to null
     var base64regex =
       /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-    if (base64regex.test(token) && token) localStorage.setItem("token", token);
+    if (base64regex.test(token) && token) {
+      if (localStorage.getItem("token")) {
+        let tk = JSON.parse(atob(localStorage.getItem("token")));
+        if (JSON.parse(atob(token)).timestamp != tk.timestamp)
+          // blocking token update when timestamp is same and updating when different
+          localStorage.setItem("token", token);
+      } else {
+        localStorage.setItem("token", token);
+      }
+    }
   }, [searchParams]);
+
   return (
     <div className="App">
       <Routes>

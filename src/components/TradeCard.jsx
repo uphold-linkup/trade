@@ -88,9 +88,21 @@ const InvestmentForm = ({ price }) => {
       handleSnackBar({ vertical: "top", horizontal: "right" });
       return;
     }
-    const inv =
+    let inv =
       document.querySelector(".investment-field input") &&
-      parseFloat(document.querySelector(".investment-field input").value);
+      document.querySelector(".investment-field input").value;
+    if (inv == "") {
+      setSnackbar({ message: "Enter Investment Amount", severity: "info" });
+      handleSnackBar({ vertical: "top", horizontal: "right" });
+      return;
+    } else inv = parseFloat(inv);
+
+    if (profit == 0.0) {
+      setSnackbar({ message: "Select Trade Time", severity: "info" });
+      handleSnackBar({ vertical: "top", horizontal: "right" });
+      return;
+    }
+
     let orders = JSON.parse(localStorage.getItem("orders"))
       ? JSON.parse(localStorage.getItem("orders"))
       : [];
